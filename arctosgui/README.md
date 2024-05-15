@@ -1,39 +1,43 @@
 
-### Setting Up Arctos Simulation with Motion Planning
+### Arctos CAN controller GUI 
 ![gui-light.jpg](/arctosgui/img/gui-light.jpg)
+
+## 
+
 
 Copy scripts interface.py and transform.py to:
 
 /your-path/arctos_ros/src/arctos_moveit/scripts
 
 make sure they are executable with: 
-
+```
 sudo chmod +x interface.py 
 sudo chmod +x transform.py 
-
+```
+```
 cd ~/your-path/arctos_ros 
 catkin build 
-
+```
 Install requirements:
- 
+ ```
 pip install -r requirements.txt
-
+```
 Now you can go to 
-
+```
 cd ~/your-path/arctosgui 
-
+```
 and run 
-
+```
 ./run.sh 
-
+```
 4 tabs will open 
 you can manually open them by: 
-
+```
 roslaunch arctos_config demo launch 
 rosrun moveo_moveit interface.py 
 rosrun moveo_moveit transform.py 
 python3 ui.py 
-
+```
 Wait for the gui and rviz to show 
 
 In moveit rviz go File>Open config or Ctrl+O and open 
