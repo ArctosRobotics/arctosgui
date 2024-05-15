@@ -1,3 +1,7 @@
+
+### Setting Up Arctos Simulation with Motion Planning
+![gui-light.jpg](/img/gui-light.jpg)
+
 Copy scripts interface.py and transform.py to:
 
 /your-path/arctos_ros/src/arctos_moveit/scripts
