@@ -1,8 +1,0 @@
-serial
-Pillow
-can
-tkinter
-ttkthemes
-tkfontawesome
-rospy
-sv-ttk
