@@ -1,6 +1,6 @@
 
 ### Setting Up Arctos Simulation with Motion Planning
-![gui-light.jpg](/img/gui-light.jpg)
+![gui-light.jpg](/arctosgui/img/gui-light.jpg)
 
 Copy scripts interface.py and transform.py to:
 
