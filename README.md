@@ -1,6 +1,6 @@
 
 ### Arctos CAN controller GUI 
-![gui-light.jpg](/arctosgui/img/gui-light.jpg)
+![gui-light.jpg](/img/gui-light.jpg)
 
 ## 
 
