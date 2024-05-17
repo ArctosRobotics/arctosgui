@@ -3,7 +3,10 @@
 ![gui-light.jpg](/img/gui-light.jpg)
 
 ## 
-
+Open terminal in desktop: 
+```
+git clone https://github.com/ArctosRobotics/ArctosGUI
+```
 
 Copy scripts interface.py and transform.py to:
 
@@ -18,15 +21,16 @@ sudo chmod +x transform.py
 cd ~/your-path/arctos_ros 
 catkin build 
 ```
-Install requirements:
- ```
-pip install -r requirements.txt
-```
+
 Now you can go to 
 ```
-cd ~/your-path/arctosgui 
+cd ~/your-path/arctosgui
 ```
-and run 
+Install requirements:
+ ```
+pip3 install -r requirements.txt
+```
+Then run 
 ```
 ./run.sh 
 ```
