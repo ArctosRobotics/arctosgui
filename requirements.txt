@@ -1,7 +1,7 @@
 serial
 Pillow
 can
-tkinter
+tk
 ttkthemes
 tkfontawesome
 rospy
