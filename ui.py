@@ -10,10 +10,12 @@ from sensor_msgs.msg import JointState
 from geometry_msgs.msg import TransformStamped
 from PIL import Image, ImageTk
 import sv_ttk
-from tkfontawesome import icon_to_image
 import math
 
 
+
+# Change this according to your folder 
+user_path = "/home/ee/arctosgui"
 
 root = tk.Tk()
 root.title("Arctos CAN controller")
@@ -215,15 +217,25 @@ def send_data():
         update_message(f"Error writing to 'gcode.txt': {e}")
     os.system("python3 send.py")
 
-# Button icons
-toggle = icon_to_image("toggle-on", fill="#646464", scale_to_width=25)
-connekt = icon_to_image("plug", fill="#646464", scale_to_width=15)
-ref = icon_to_image("sync-alt", fill="#646464", scale_to_width=20)
-play = icon_to_image("play", fill="#646464", scale_to_width=15)
-stop = icon_to_image("stop", fill="#646464", scale_to_width=15)
-er = icon_to_image("eraser", fill="#646464", scale_to_width=20)
 
-ico = Image.open('/home/aa/Desktop/arctosgui/img/icon.png')
+def load_icon(image_path, width):
+    try:
+        image = Image.open(image_path).convert("RGBA")  # Ensure transparency
+        image = image.resize((width, width), Image.LANCZOS)  # Resize while maintaining aspect ratio
+        return ImageTk.PhotoImage(image)
+    except Exception as e:
+        print(f"Error loading icon {image_path}: {e}")
+        return None
+
+# Load icons from the img folder
+toggle = load_icon(os.path.join(user_path, "img/toggle-on-solid.png"), 25)
+connekt = load_icon(os.path.join(user_path, "img/plug-solid.png"), 15)
+ref = load_icon(os.path.join(user_path, "img/sync-alt-solid.png"), 20)
+play = load_icon(os.path.join(user_path, "img/play-solid.png"), 15)
+stop = load_icon(os.path.join(user_path, "img/stop-solid.png"), 15)
+er = load_icon(os.path.join(user_path, "img/eraser-solid.png"), 20)
+
+ico = Image.open(os.path.join(user_path, 'img/icon.png'))
 photo = ImageTk.PhotoImage(ico)
 root.wm_iconphoto(False, photo)
 
@@ -352,8 +364,8 @@ canvas = tk.Canvas(root, height=302, width=302, bd=0, highlightthickness=0, reli
 canvas.grid(row=9, column=3, padx=5, pady=5, rowspan=10, sticky="w")  # Span across multiple rows
 
 # Replace these paths with the actual paths to your image files
-BACKGROUND_IMAGE_PATH = "/home/aa/Desktop/arctosgui/img/strelice.png"
-BUTTON_IMAGE_PATH = "/home/aa/Desktop/arctosgui/img/bg.png"
+BACKGROUND_IMAGE_PATH = os.path.join(user_path, "img/strelice.png")
+BUTTON_IMAGE_PATH = os.path.join(user_path, "img/bg.png")
 
 # Open the background image using PIL and resize it to zoom out
 background_img = Image.open(BACKGROUND_IMAGE_PATH)
