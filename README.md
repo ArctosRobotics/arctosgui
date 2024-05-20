@@ -1,37 +1,76 @@
-
-### Arctos CAN controller GUI 
-![gui-light.jpg](/img/gui-light.jpg)
-
-## 
-Open terminal in desktop: 
 ```
-git clone https://github.com/ArctosRobotics/ArctosGUI
-```
+su root 
+nano /etc/sudoers
 
-Copy scripts interface.py and transform.py to:
-
-/your-path/arctos_ros/src/arctos_moveit/scripts
-
-make sure they are executable with: 
-```
-sudo chmod +x interface.py 
-sudo chmod +x transform.py 
+<username> user_name ALL=(ALL)  ALL
 ```
 ```
-cd ~/your-path/arctos_ros 
+sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
+sudo apt install curl # if you haven't already installed curl
+curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | sudo apt-key add -
+sudo apt update
+
+sudo apt install ros-melodic-desktop 
+echo "source /opt/ros/melodic/setup.bash" >> ~/.bashrc
+source ~/.bashrc
+
+sudo su 
+apt install python-rosdep2 
+apt-get-update
+apt-get dist-upgrade
+```
+in new terminal: 
+```
+sudo apt-get install ros-melodic-catkin python-catkin-tools 
+sudo apt install ros-melodic-moveit
+source /opt/ros/melodic/setup.bash 
+sudo apt-get install ros-melodic-moveit ros-melodic-moveit-visual-tools 
+
+sudo apt-get install git
+git clone https://github.com/ArctosRobotics/ROS
+
 catkin build 
+cd ROS 
+source devel/setup.bash 
+```
+```
+sudo apt update
+sudo apt install python3-pip
+pip3 install python-can[serial]
+sudo apt-get install python3-tk
+pip3 install sv-ttk
+ ```
+```
+git clone https://github.com/ArctosRobotics/arctosgui
+
+
+pip3 install ttkthemes
+nano ~/.bashrc
+```
+add this line: 
+```
+source /home/<your username>/ROS/devel/setup.bash 
+```
+Ctrl+S
+Ctrl+X
+```
+sudo apt install python3-rosdep python3-rosinstall-generator python3-wstool build-essential 
+sudo apt install python3-rosinstall python3-catkin-tools python3-osrf-pycommon
+sudo apt-get install ros-melodic-robot-state-publisher 
+sudo apt-get install ros-melodic-joint-state-publisher 
+sudo chmod a+rw /dev/ttyACM0
 ```
 
-Now you can go to 
 ```
-cd ~/your-path/arctosgui
+sudo rosdep init
+rosdep update
 ```
-Install requirements:
- ```
-pip3 install -r requirements.txt
 ```
-Then run 
-```
+cd arctosgui 
+ls 
+Ctrl+C
+chmod +x run.sh 
+ls # should be green 
 ./run.sh 
 ```
 4 tabs will open 
