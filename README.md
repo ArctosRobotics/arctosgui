@@ -73,10 +73,7 @@ In theory raw gear ratios should be multiplied to 0.5, so gear_ratios would be
 [6.75, 75, 75, 24, 33.91, 33.91]
 They are not tested! 
 
-If your folder is not in desktop and your machine is not named "aa" you should edit those lines in ui.py script according to your path: 
+# Change this according to your folder 
 ```
-BACKGROUND_IMAGE_PATH = "/home/aa/Desktop/arctosgui/img/strelice.png"
-BUTTON_IMAGE_PATH = "/home/aa/Desktop/arctosgui/img/bg.png"
-ico = Image.open('/home/aa/Desktop/arctosgui/img/icon.png')
+user_path = "/home/ee/arctosgui"
 ```
-
