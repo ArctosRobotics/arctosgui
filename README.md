@@ -16,7 +16,7 @@ source ~/.bashrc
 
 sudo su 
 apt install python-rosdep2 
-apt-get-update
+apt-get update
 apt-get dist-upgrade
 ```
 in new terminal: 
