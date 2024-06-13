@@ -116,3 +116,16 @@ They are not tested!
 ```
 user_path = "/home/ee/arctosgui"
 ```
+
+
+# Now supports open loop version with Arduino MEGA. 
+just adapt serial port to your specific port 
+
+```
+serial_port = "/dev/ttyUSB0"
+```
+
+Before using you need to give permissions to ttyUSB0
+```
+sudo chmod a+rw /dev/ttyUSB0
+```
