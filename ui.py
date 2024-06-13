@@ -15,7 +15,7 @@ import math
 
 
 # Change this according to your folder 
-user_path = "/home/ee/arctosgui"
+user_path = "/home/zz/arctosgui"
 
 root = tk.Tk()
 root.title("Arctos CAN controller")
@@ -80,6 +80,9 @@ def btn_clicked(button_name):
         # Plan Cartesian path
         plan_cartesian_path()
 
+def run_gcode_script():
+    os.system("python3 rosjog.py")
+    os.system("python3 sendgcode.py")
 
 
 def update_joint_sliders(data):
@@ -261,6 +264,10 @@ connect_button.grid(row=0, column=2, padx=5, pady=5)
 disconnect_button = ttk.Button(root, text="Disconnect", command=disconnect)
 disconnect_button.grid(row=0, column=3, padx=5, pady=5, sticky="w")
 
+# Gcode button
+run_gcode_button = ttk.Button(root, text="Run g-code",image=play, compound=tk.LEFT, command=run_gcode_script)
+run_gcode_button.grid(row=1, column=0,columnspan=1, padx=5, pady=5, sticky="ew")
+
 # Send button
 send_button = ttk.Button(root, text="Run RoboDK", image=play, compound=tk.LEFT, command=send)
 send_button.grid(row=1, column=0, columnspan=2, padx=5, pady=5, sticky="e")
@@ -403,6 +410,10 @@ def on_click(event):
             break
 
 root.bind("<Button-1>", on_click)
+
+
+
+
 
 # ROS initialization
 rospy.init_node('arctos_control_gui', anonymous=True)
