@@ -52,7 +52,7 @@ git clone https://github.com/ArctosRobotics/arctosgui
 pip3 install ttkthemes
 nano ~/.bashrc
 ```
-add this line: 
+add this line with your username: 
 ```
 source /home/<your username>/ROS/devel/setup.bash 
 ```
