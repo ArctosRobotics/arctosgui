@@ -1,9 +1,8 @@
 import os
 import time
 from typing import List
-
 import can
-
+import serial.tools.list_ports
 
 def parse_can_message(line: str) -> can.Message:
     """
@@ -28,7 +27,6 @@ def parse_can_message(line: str) -> can.Message:
     ]
     return can.Message(arbitration_id=arbitration_id, data=data, is_extended_id=False)
 
-
 def calculate_crc(arbitration_id: int, status: int) -> int:
     """
     Calculates a simple CRC value based on the arbitration ID and status.
@@ -41,7 +39,6 @@ def calculate_crc(arbitration_id: int, status: int) -> int:
         An integer representing the calculated CRC value.
     """
     return (arbitration_id + 0xF4 + status) & 0xFF
-
 
 def adjust_speeds_within_packet(messages: List[can.Message]) -> None:
     """
@@ -63,7 +60,6 @@ def adjust_speeds_within_packet(messages: List[can.Message]) -> None:
         adjusted_speed = int((speed / reference_speed) * reference_speed)
         msg.data[3] = (adjusted_speed >> 8) & 0xFF
         msg.data[4] = adjusted_speed & 0xFF
-
 
 def can_send_messages(bus: can.interface.Bus, messages: List[can.Message]) -> None:
     """
@@ -111,6 +107,18 @@ def can_send_messages(bus: can.interface.Bus, messages: List[can.Message]) -> No
             print("Timeout waiting for responses from expected motors with status 2.")
             break
 
+def find_can_port():
+    """
+    Finds the port for the CAN interface.
+
+    Returns:
+        The device name of the CAN interface port, or None if not found.
+    """
+    ports = list(serial.tools.list_ports.comports())
+    for port in ports:
+        if "CAN" in port.description or "USB2CAN" in port.description:
+            return port.device
+    return None
 
 def main() -> None:
     """
@@ -120,10 +128,16 @@ def main() -> None:
     file_path = os.path.join(script_directory, "jog.txt")
 
     if not os.path.exists(file_path):
-        print("gcode.txt file not found in the script directory.")
+        print("jog.txt file not found in the script directory.")
         return
 
-    bus = can.interface.Bus(bustype="slcan", channel="/dev/ttyACM0", bitrate=500000)
+    can_port = find_can_port()
+    if can_port is None:
+        print("No CAN interface found. Please check your connection.")
+        return
+
+    print(f"Using CAN interface on port: {can_port}")
+    bus = can.interface.Bus(bustype="slcan", channel=can_port, bitrate=500000)
 
     with open(file_path, "r") as file:
         lines = file.readlines()
@@ -136,9 +150,6 @@ def main() -> None:
         can_send_messages(bus, messages)
 
     bus.shutdown()
-
-
-
 
 if __name__ == "__main__":
     main()
