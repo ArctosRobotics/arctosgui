@@ -88,9 +88,6 @@ arctosgui_config.rviz
 
 Connect the robot 
 
-If you have other port than /dev/ttyACM0 edit files 
-send.py and ros.py to adress your specific port 
-
 Plan new toolpath by moving joints or tool
 Run ROS button will send CAN messages from new pose 
 
