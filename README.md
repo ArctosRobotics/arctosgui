@@ -1,3 +1,5 @@
+![arctosgui.png](/arctosgui.png)
+
 ```
 su root 
 nano /etc/sudoers
