@@ -1,3 +1,6 @@
+# Arctos GUI v0.1.1 
+This is a GUI application for controlling a robotic arm via ROS. It supports connections through either an Arduino Mega or a CANable adapter. The interface allows for controlling the arm's joints, Cartesian coordinates, and gripper movements. Additionally, it includes functionality to send custom CAN messages to the robotic arm.
+
 ![arctosgui.png](/arctosgui.png)
 
 ```
@@ -60,7 +63,7 @@ sudo apt install python3-rosdep python3-rosinstall-generator python3-wstool buil
 sudo apt install python3-rosinstall python3-catkin-tools python3-osrf-pycommon
 sudo apt-get install ros-melodic-robot-state-publisher 
 sudo apt-get install ros-melodic-joint-state-publisher 
-sudo chmod a+rw /dev/ttyACM0
+sudo chmod a+rw /dev/tty<YOUR PORT> 
 ```
 
 ```
