@@ -81,7 +81,7 @@ ls # should be green
 4 tabs will open 
 you can manually open them by: 
 ```
-roslaunch arctos_config demo launch 
+roslaunch arctos_config demo.launch 
 rosrun moveo_moveit interface.py 
 rosrun moveo_moveit transform.py 
 python3 ui.py 
