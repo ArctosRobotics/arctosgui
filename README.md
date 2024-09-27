@@ -1,180 +1,156 @@
-# Arctos GUI v0.1.1 
-This is a GUI application for controlling a robotic arm via ROS. It supports connections through either an Arduino Mega or a CANable adapter. The interface allows for controlling the arm's joints, Cartesian coordinates, and gripper movements. Additionally, it includes functionality to send custom CAN messages to the robotic arm.
+# Arctos GUI v0.1.1
 
-![arctosgui.png](/arctosgui.png)
+Arctos GUI is a graphical user interface for controlling a robotic arm using ROS (Robot Operating System). It supports connections through Arduino Mega or CANable adapter, allowing users to control the arm's joints, Cartesian coordinates, and gripper movements, as well as send custom CAN messages.
+
+![Arctos GUI Screenshot](/arctosgui.png)
+
+## Installation Options
+
+You have two options to install Arctos GUI:
+1. **Step-by-step installation**: Install ROS, dependencies, and Arctos GUI manually.
+2. **Preconfigured Virtual Machine**: Use a preconfigured Virtual Machine image with everything set up for you.
+
+## Table of Contents
+
+- [Step-by-Step Installation](#step-by-step-installation)
+- [Preconfigured Virtual Machine](#preconfigured-virtual-machine)
+- [Gear Ratios](#gear-ratios)
+- [Arduino MEGA Open Loop Support](#arduino-mega-open-loop-support)
+- [Useful Links](#useful-links)
+
+# Step-by-Step Installation
+
+
+To start, you need to install ROS and its dependencies:
 
 ```
-su root 
+su root
 nano /etc/sudoers
-
-<username> user_name ALL=(ALL)  ALL
-```
-```
-sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
-sudo apt install curl # if you haven't already installed curl
-curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | sudo apt-key add -
-sudo apt update
-
-sudo apt install ros-melodic-desktop 
-echo "source /opt/ros/melodic/setup.bash" >> ~/.bashrc
-source ~/.bashrc
-
-sudo su 
-apt install python-rosdep2 
-apt-get update
-apt-get dist-upgrade
-```
-in new terminal: 
-```
-sudo apt-get install ros-melodic-catkin python-catkin-tools 
-sudo apt install ros-melodic-moveit
-source /opt/ros/melodic/setup.bash 
-sudo apt-get install ros-melodic-moveit ros-melodic-moveit-visual-tools 
-
-sudo apt-get install git
-git clone https://github.com/ArctosRobotics/ROS
-
-catkin build 
-cd ROS 
-source devel/setup.bash 
-```
-```
-sudo apt update
-sudo apt install python3-pip
-pip3 install python-can[serial]
-sudo apt-get install python3-tk
-pip3 install sv-ttk
+<username> ALL=(ALL) ALL
  ```
 ```
+sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
+sudo apt install curl
+curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | sudo apt-key add -
+sudo apt update
+sudo apt install ros-melodic-desktop
+echo "source /opt/ros/melodic/setup.bash" >> ~/.bashrc
+source ~/.bashrc
+Next, install additional ROS dependencies:
+ ```
+```
+sudo apt-get install ros-melodic-catkin python-catkin-tools
+sudo apt install ros-melodic-moveit ros-melodic-moveit-visual-tools 
+sudo apt-get install git
+git clone https://github.com/ArctosRobotics/ROS
+bash
+  ```
+```
+catkin build 
+cd ROS
+source devel/setup.bash
+ ```
+
+Clone and Build the Repository
+Clone the Arctos GUI repository and install dependencies:
+
+ 
+ 
+```
 git clone https://github.com/ArctosRobotics/arctosgui
+sudo apt update
+sudo apt install python3-pip
+pip3 install python-can[serial] ttkthemes sv-ttk
+
+```
+
+Add ROS environment to your bash profile:
 
 
-pip3 install ttkthemes
+
+```
 nano ~/.bashrc
 ```
-add this line with your username: 
-```
-source /home/<your username>/ROS/devel/setup.bash 
-```
-Ctrl+S
-Ctrl+X
-```
-sudo apt install python3-rosdep python3-rosinstall-generator python3-wstool build-essential 
-sudo apt install python3-rosinstall python3-catkin-tools python3-osrf-pycommon
-sudo apt-get install ros-melodic-robot-state-publisher 
-sudo apt-get install ros-melodic-joint-state-publisher 
-sudo chmod a+rw /dev/tty<YOUR PORT> 
-```
+
+Add this line:
 
 ```
-sudo rosdep init
-rosdep update
+source /home/<your-username>/ROS/devel/setup.bash
 ```
+
+Save with Ctrl+S and exit with Ctrl+X.
+
+Running the GUI
+After installation, navigate to the arctosgui directory and start the GUI:
+
+
+ ```
+cd arctosgui
+chmod +x run.sh
+./run.sh
 ```
-cd arctosgui 
-ls 
-Ctrl+C
-chmod +x run.sh 
-ls # should be green 
-./run.sh 
-```
-4 tabs will open 
-you can manually open them by: 
-```
+
+Alternatively, you can manually open each tab:
+
+
+ ```
 roslaunch arctos_config demo.launch 
 rosrun moveo_moveit interface.py 
 rosrun moveo_moveit transform.py 
-python3 ui.py 
+python3 ui.py
+Connecting the Robot
 ```
-Wait for the gui and rviz to show 
+In MoveIt RViz, go to File > Open Config or press Ctrl+O and open the arctosgui_config.rviz file. Once the configuration is loaded, connect the robot via Arduino or CANable, and use the GUI to plan and execute movements.
 
-In moveit rviz go File>Open config or Ctrl+O and open 
-arctosgui_config.rviz
+# Preconfigured Virtual Machine
+If you prefer a faster setup, you can use a preconfigured Virtual Machine:
 
-Connect the robot 
 
-Plan new toolpath by moving joints or tool
-Run ROS button will send CAN messages from new pose 
+- Download and install [VirtualBox](https://www.virtualbox.org/wiki/Downloads).
+- Download the Arctos preconfigured VM image from this [Google Drive link](https://drive.google.com/drive/folders/1R-wapvf-ZU6bWU-n6ExmzQ6M_z44bq0r?usp=sharing
+).
+- Open VirtualBox and create a new machine (Ctrl+N).
+- Name the machine and set the type to Linux (Debian 64-bit).
+- Use iso image zz-disk001.iso
+- Set at least 4 GB of RAM.
+- Use the existing virtual hard disk file (zz-disk002.vmdk).
+- Start the machine and log in with the password: zz.
+- In the left toolbar, launch Arctos GUI, connect the robot via Arduino or CANable, and start using the interface.
 
-Run RoboDK will send gcode.tap file to robot 
-Make sure that you copy the gcode from RoboDK post processor to gcode.tap or adapt it to export code to arctos gui location under the name gcode.tap and replace it. 
+# Gear Ratios
+Set the gear ratios in convert.py and roscan.py as needed for your robot:
 
-Set gear ratios in convert.py and roscan.py 
+ 
 gear_ratios = [1, 1, 1, 1, 1, 1]  # Replace with your actual gearbox ratios
+For raw gear ratios:
 
-Raw gear ratios. 
-X  13.5
-Y  150
-Z  150
-A  48
-B  67.82
-C  67.82
+X: 13.5
+Y: 150
+Z: 150
+A: 48
+B: 67.82
+C: 67.82
+These raw gear ratios can be multiplied by 0.5 for estimated values:
 
-In theory raw gear ratios should be multiplied to 0.5, so gear_ratios would be
-[6.75, 75, 75, 24, 33.91, 33.91]
-They are not tested! 
+  ```
+gear_ratios = [6.75, 75, 75, 24, 33.91, 33.91]
+ ```
 
-# Change this according to your folder 
-```
-user_path = "/home/ee/arctosgui"
-```
+# Arduino MEGA Open Loop Support
+To use the open loop version with Arduino MEGA, adapt the serial port configuration in convert.py:
 
-
-# Now supports open loop version with Arduino MEGA. 
-just adapt serial port to your specific port 
-
-```
+ ```
 serial_port = "/dev/ttyUSB0"
 ```
-```
-Before using you need to give permissions to ttyUSB0
-```
+
+Before running, you need to give permissions to the USB port:
+
+ ```
 sudo chmod a+rw /dev/ttyUSB0
-
-# Virtual Machine with preconfigured ROS and Arctos GUI
 ```
-1. Download Virtual Box 
 
-https://www.virtualbox.org/wiki/Downloads
+# Useful Links
 
-2. Install 
-
-3. Download Arctos preconfigured vm image here: 
-
-https://drive.google.com/drive/folders/1R-wapvf-ZU6bWU-n6ExmzQ6M_z44bq0r?usp=sharing
-
-4. Extract the zip file  
-
-5. In VB create new machine Machine > New Ctrl - N 
-
-- give a name 
-
-- Machine folder might be C:\Users\msi\VirtualBox VMs 
-
-- ISO Image: ArctosGuiVm\zz-disk001.iso
-
-- Type: Linux 
-
-- Version: Debian (64 bit)
-
-- Increase ram to at least 4096
-
-- Use an existing virtual hard disk file > Add > zz-disk002.vmdk
-
-- Choose > Create 
-
-- Start 
-
-- Password is: zz 
-
-- In the left toolbar there is Arctos GUI icon > launch it 
-
-- Connect the robot Arduino / CANable 
-
-- Devices > USB > Quin Heng CH341 / CANable 
-
-- In Arctos GUI click on refresh button (it will show USB0, USB1, ACM0, ACM1) depending on the port 
-
-- Connect 
-
-```
+- [Documentation](https://arctosrobotics.com/docs/)
+- [Manuals](https://arctosrobotics.com/#Assembly)
+- [CAD Files](https://arctosrobotics.com/#Assembly)
