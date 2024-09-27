@@ -126,8 +126,55 @@ just adapt serial port to your specific port
 ```
 serial_port = "/dev/ttyUSB0"
 ```
-
+```
 Before using you need to give permissions to ttyUSB0
 ```
 sudo chmod a+rw /dev/ttyUSB0
+
+# Virtual Machine with preconfigured ROS and Arctos GUI
+```
+1. Download Virtual Box 
+
+https://www.virtualbox.org/wiki/Downloads
+
+2. Install 
+
+3. Download Arctos preconfigured vm image here: 
+
+https://drive.google.com/drive/folders/1R-wapvf-ZU6bWU-n6ExmzQ6M_z44bq0r?usp=sharing
+
+4. Extract the zip file  
+
+5. In VB create new machine Machine > New Ctrl - N 
+
+- give a name 
+
+- Machine folder might be C:\Users\msi\VirtualBox VMs 
+
+- ISO Image: ArctosGuiVm\zz-disk001.iso
+
+- Type: Linux 
+
+- Version: Debian (64 bit)
+
+- Increase ram to at least 4096
+
+- Use an existing virtual hard disk file > Add > zz-disk002.vmdk
+
+- Choose > Create 
+
+- Start 
+
+- Password is: zz 
+
+- In the left toolbar there is Arctos GUI icon > launch it 
+
+- Connect the robot Arduino / CANable 
+
+- Devices > USB > Quin Heng CH341 / CANable 
+
+- In Arctos GUI click on refresh button (it will show USB0, USB1, ACM0, ACM1) depending on the port 
+
+- Connect 
+
 ```
