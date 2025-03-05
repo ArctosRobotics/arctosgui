@@ -46,8 +46,11 @@ git clone https://github.com/ArctosRobotics/ROS
 bash
   ```
 ```
-catkin build 
+mv ROS ROStemp
+mkdir -p ROS/src
+mv ROStemp/* ROStemp/.* ROS/src
 cd ROS
+catkin build
 source devel/setup.bash
  ```
 
@@ -60,6 +63,7 @@ Clone the Arctos GUI repository and install dependencies:
 git clone https://github.com/ArctosRobotics/arctosgui
 sudo apt update
 sudo apt install python3-pip
+sudo apt install python3-tk -y
 pip3 install python-can[serial] ttkthemes sv-ttk
 
 ```
